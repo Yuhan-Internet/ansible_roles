@@ -1,0 +1,4 @@
+---
+timesync_ntp_servers: []
+timesync_ntp_server_or_client: "client"
+timesync_ntp_clients: []

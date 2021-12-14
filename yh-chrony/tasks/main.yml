@@ -1,0 +1,46 @@
+---
+- name: repo cache updated (apt)
+  apt:
+    update_cache: yes
+    # update_cache_retries: 5, need ansible 2.10
+  when:
+    - ansible_facts['pkg_mgr'] == 'apt'
+    - install_chrony | bool
+
+- name: repo cache updated (dnf)
+  dnf:
+    update_cache: yes
+  when:
+    - ansible_facts['pkg_mgr'] == 'dnf'
+    - install_chrony | bool
+
+- name: chrony installed
+  package:
+    name: chrony
+    state: latest
+  when:
+    - install_chrony | bool
+
+- name: chrony.conf generated (apt)
+  template:
+    src: chrony.conf.j2
+    dest: /etc/chrony/chrony.conf
+    backup: true
+    mode: 0644
+  when: ansible_facts['pkg_mgr'] == 'apt'
+  notify: restart chronyd
+
+- name: chrony.conf generated (dnf and yum)
+  template:
+    src: chrony.conf.j2
+    dest: /etc/chrony.conf
+    backup: true
+    mode: 0644
+  when: ansible_facts['pkg_mgr'] == 'dnf' or ansible_facts['pkg_mgr'] == 'yum'
+  notify: restart chronyd
+
+- name: chronyd started and enabled
+  service:
+    name: chronyd
+    state: started
+    enabled: true
