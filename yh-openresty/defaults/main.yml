@@ -1,0 +1,17 @@
+---
+or_container_name: openresty
+container_binary: podman
+openresty_conf_file: "{{ yh_openresty_dir }}/nginx/nginx.conf"
+openresty_conf_dir: "{{ yh_openresty_dir }}/nginx/conf.d/"
+openresty_lua_dir: "{{ yh_openresty_dir }}/nginx/lua/"
+opt_yuhan_dir: "{{ yh_openresty_dir }}"
+openresty_backend_dir: /opt/yuhan-ceph/openresty/backend/
+openresty_logs_dir: /var/log/s3-endpoint/
+or_client_container_name: openresty
+or_master_container_name: openresty
+or_es_container_name:     openresty
+# openresty_container_cpu_period: 100000
+# openresty_container_cpu_cores: 4
+# container_memory is in GB
+# openresty_container_memory: 2
+# openresty_container_image: "{{ ceph_docker_registry }}/sds/or:v2"

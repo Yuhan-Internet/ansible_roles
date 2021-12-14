@@ -1,0 +1,19 @@
+---
+- name: openresty log dir checked
+  file:
+    path: "{{ openresty_logs_dir }}"
+    state: directory
+    owner: root
+    group: root
+    mode: 0755
+
+- name: include_tasks systemd.yml
+  include_tasks: systemd.yml
+
+- name: start the openresty service
+  systemd:
+    name: "{{ or_container_name }}"
+    state: started
+    enabled: yes
+    daemon_reload: yes
+  failed_when: false

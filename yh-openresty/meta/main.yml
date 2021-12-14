@@ -1,0 +1,15 @@
+---
+galaxy_info:
+  company: Yu Han
+  author: Mickey
+  description: Deploys openresty containers for load balancing
+  license: Apache
+  min_ansible_version: 2.4
+  platforms:
+    - name: CentOS
+      versions:
+        - 8
+  galaxy_tags:
+    - system
+    - yuhan
+dependencies: []

@@ -1,0 +1,21 @@
+---
+- name: ship openresty systemd service
+  template:
+    src: openresty.service.j2
+    dest: "/etc/systemd/system/{{ or_container_name }}.service"
+    owner: root
+    group: root
+    mode: 0644
+    
+- name: ship yuhan-s3-lb.target
+  copy:
+    content: |
+      [Unit]
+      Description=yuhan-s3-lb target allowing to start/stop s3-endpoint-*
+
+      [Install]
+      WantedBy=multi-user.targe
+    dest: /etc/systemd/system/yuhan-s3-lb.target
+    owner: root
+    group: root
+    mode: 0644
