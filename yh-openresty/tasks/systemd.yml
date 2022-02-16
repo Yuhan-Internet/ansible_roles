@@ -14,7 +14,7 @@
       Description=yuhan-s3-lb target allowing to start/stop s3-endpoint-*
 
       [Install]
-      WantedBy=multi-user.targe
+      WantedBy=multi-user.target
     dest: /etc/systemd/system/yuhan-s3-lb.target
     owner: root
     group: root
